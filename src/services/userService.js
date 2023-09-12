@@ -60,4 +60,31 @@ let checkUserEmail = (email) => {
   });
 };
 
-module.exports = { handleUserLogin };
+let getUsersAll = (userId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let users = "";
+      if (userId === "ALL") {
+        users = await db.User.findAll({
+          attributes: {
+            exclude: ["passWord"],
+          },
+        });
+      }
+      if (userId && userId !== "ALL") {
+        users = await db.User.findOne({
+          where: { id: userId },
+          attributes: {
+            exclude: ["passWord"],
+          },
+        });
+      }
+
+      resolve(users);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+module.exports = { handleUserLogin, getUsersAll };

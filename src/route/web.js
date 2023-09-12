@@ -13,6 +13,8 @@ let initWebRoutes = (app) => {
 
   router.post("/api/login", userController.handleLogin);
 
+  router.get("/api/get-users-all", userController.handleGetUsers);
+
   return app.use("/", router);
 };
 
