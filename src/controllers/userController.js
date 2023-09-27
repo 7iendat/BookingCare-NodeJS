@@ -40,7 +40,26 @@ let handleGetUsers = async (req, res) => {
   });
 };
 
+let handleCreateUser = async (req, res) => {
+  let message = await userService.createNewUser(req.body);
+  return res.status(200).json(message);
+};
+
+let handleEditUser = async (req, res) => {
+  let message = await userService.editUser(req.body);
+  return res.status(200).json(message);
+};
+
+let handleDeleteUser = async (req, res) => {
+  let message = await userService.deleteUser(req.body.id);
+
+  return res.status(200).json(message);
+};
+
 module.exports = {
   handleLogin,
   handleGetUsers,
+  handleCreateUser,
+  handleEditUser,
+  handleDeleteUser,
 };
